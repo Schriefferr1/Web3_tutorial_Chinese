@@ -11,7 +11,7 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {FundMe} from "./FundMe.sol";
 
 contract FundTokenERC20 is ERC20 {
-    FundMe fundMe;
+    FundMe fundMe;//fundMe 存的就是一个链上地址（理想情况是 FundMe 合约或其代理的地址），只是带了 FundMe 这个 ABI 类型标签，便于直接调函数。取原始地址用 address(fundMe)
     constructor(address fundMeAddr) ERC20("FundTokenERC20", "FT") {
         fundMe = FundMe(fundMeAddr);
     }
