@@ -12,6 +12,12 @@ import {FundMe} from "./FundMe.sol";
 
 contract FundTokenERC20 is ERC20 {
     FundMe fundMe;//fundMe 存的就是一个链上地址（理想情况是 FundMe 合约或其代理的地址），只是带了 FundMe 这个 ABI 类型标签，便于直接调函数。取原始地址用 address(fundMe)
+//FundMe类型名随意，链上不看名字，只看地址 + calldata。
+//可把 FundMe 换成任何合法标识符（如 IFund）。但源码里必须有对应的类型或接口声明，否则编译不过。
+
+//不能随意改函数名或参数类型。它们决定 4 字节选择器；与目标合约不一致就调用失败。
+
+
     constructor(address fundMeAddr) ERC20("FundTokenERC20", "FT") {
         fundMe = FundMe(fundMeAddr);
     }
